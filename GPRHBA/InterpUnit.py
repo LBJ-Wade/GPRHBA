@@ -4,6 +4,8 @@ from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import RBF,WhiteKernel
 from scipy import stats
 from scipy.interpolate import griddata,interpn
+import pickle
+import copy
 
 class InterpUnit():
 	"""
@@ -142,3 +144,11 @@ class InterpUnit():
 			shape = len(axis[i])
 			axis[i] = np.append(axis[i],np.gradient(axis[i])[0])
 		return axis,shape
+
+	def SaveGP(self,filename):
+		output = copy.deepcopy(self)
+		output.dataMat = 0. #Voiding the data matrix to avoid large output
+		output.datComp.dataMat = 0. #Voiding the data matrix to avoid large output
+		filehandler = open(filename,'w')
+		pickle.dump(output,filehandler)
+		filehandler.close()

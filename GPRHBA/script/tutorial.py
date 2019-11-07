@@ -33,7 +33,7 @@ sigma = 100
 #if not os.path.exists(output_directory):
 #	os.mkdir(output_directory)
 
-histBins = simulations['histBins']
+histBins = simulations['histBin']
 if histBins.ndim ==1:
 	histBins = histBins.reshape(histBins.size,1)
 
