@@ -156,6 +156,8 @@ nwalkers,ndim = 30,1
 p0 = np.array([np.random.uniform(0,265,nwalkers)]).T
 pool = Pool(4)
 
+print('Start sampling log posterior.')
+
 sampler = emcee.EnsembleSampler(nwalkers,ndim,LogProb,pool=pool)
 p0,_,_ = sampler.run_mcmc(p0,100) # Burn-in steps
 sampler.reset()
