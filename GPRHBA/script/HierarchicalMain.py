@@ -152,9 +152,9 @@ def LogProb(cube):
 	return LogLikelihood(cube)+LogPrior(cube)
 
 
-nwalkers,ndim = 120,1
+nwalkers,ndim = 30,1
 p0 = np.array([np.random.uniform(0,265,nwalkers)]).T
-pool = Pool(24)
+pool = Pool(4)
 
 sampler = emcee.EnsembleSampler(nwalkers,ndim,LogProb,pool=pool)
 p0,_,_ = sampler.run_mcmc(p0,100) # Burn-in steps
