@@ -1,5 +1,5 @@
 import numpy as np
-import GPRHBA.dataCompress
+import GPRHBA.dataCompress as dataCompress
 from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import RBF,WhiteKernel
 from scipy import stats
@@ -77,7 +77,7 @@ class InterpUnit():
 		print('Initializing gaussian process unit.')
 		kernel = 1*RBF(length_scale=np.ones(self.ndim), length_scale_bounds=(1e-2, 1e2))#+ WhiteKernel(noise_level=1e-2,noise_level_bounds=(1e-10,1e2))
 		PCA_number = self.datComp.pca_weights.shape[0]
-		print('Number of input simulation is '+str(self.simDesign.T.shape[0]))
+		print('Number of input simulation is '+str(self.simDesign.shape[0]))
 		print('Number of PCA remain is '+str(PCA_number))
 		self.gp = []
 		for i in range(PCA_number): 
