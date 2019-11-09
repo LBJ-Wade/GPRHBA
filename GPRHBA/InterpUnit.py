@@ -1,5 +1,5 @@
 import numpy as np
-import dataCompress
+import GPRHBA.dataCompress
 from sklearn.gaussian_process import GaussianProcessRegressor
 from sklearn.gaussian_process.kernels import RBF,WhiteKernel
 from scipy import stats

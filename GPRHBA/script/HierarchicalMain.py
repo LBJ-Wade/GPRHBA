@@ -3,7 +3,7 @@ Main script of the population inference
 """
 import numpy as np
 import argparse
-from InterpUnit import InterpUnit
+from GPRHBA.InterpUnit import InterpUnit
 
 """
 Arguments which are parsed to this scripts.
