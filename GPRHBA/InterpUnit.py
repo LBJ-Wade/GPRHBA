@@ -17,17 +17,29 @@ class InterpUnit():
 		simDesign: (M,d) coordinate in the hyperparameter space. d is the dimension in hyperparameter space.
 		tol(Optional):	Tolerance in PCA.
 
-	Attribute:
+	Attributes:
 		binAxes: Axes which were used to constructed the multidimensional histogram grid point.
 		binShape: Length of each axes of multidimensional histogram.
 		ndim: Number of dimension of the histogram.
 		gp: Array holding all the GP object.
 	
+	Methods:
+		InitializeDatComp: 	
+
 	---------
 	
 	
 	"""
 	def __init__(self,dataMat,histBins,simDesign,tol=1e-5):
+		""" Initialization function of the class
+
+		This function class other initialization functions, and initialize
+		an instance based on the given input.
+
+		For initialization arguments, please see the class description.
+
+		"""
+
 		self.dataMat = dataMat
 		self.histBins = histBins
 		self.binAxes = []
@@ -73,8 +85,7 @@ class InterpUnit():
 		print('Gaussian process unit initialization finished')
 	
 	def GetPtheta(self,posterior_vector,hyperParam):
-		"""
-		Get normalized probability density function value at the given coordinate and hyperparameters.
+		""" Get normalized probability density function value at the given coordinate and hyperparameters.
 		"""
 		gp_distribution = self.GetDistribution(hyperParam).reshape(self.binShape)
 		normalization = 1
@@ -113,8 +124,7 @@ class InterpUnit():
 		
  
 	def GetDistribution(self,hyperParam,return_std=False):
-		"""
-		Get the distribution on the event parameter.
+		""" Get the distribution on the event parameter.
 		"""
 		N_PCA = self.datComp.pca_weights.shape[0]
 		pca_predict = np.zeros(N_PCA)
@@ -146,6 +156,16 @@ class InterpUnit():
 		return axis,shape
 
 	def SaveGP(self,filename):
+		""" Save the interpolation unit to a file for reuse.
+		
+		The entire object could be quite large and writing it out could take
+		some time, use this with caution
+
+		Args:
+			filename (String): Output file name
+		
+		"""
+
 		output = copy.deepcopy(self)
 		output.dataMat = 0. #Voiding the data matrix to avoid large output
 		output.datComp.dataMat = 0. #Voiding the data matrix to avoid large output
