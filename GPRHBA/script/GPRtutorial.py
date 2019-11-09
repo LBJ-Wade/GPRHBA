@@ -1,7 +1,10 @@
+'''
+This scripts demostrates how the Gaussian process unit works.
+'''
+
 import matplotlib.pyplot as plt
 import numpy as np
-from GWcalculator.core import graphicsSettings
-from InterpUnit import InterpUnit
+from GPRHBA.InterpUnit import InterpUnit
 import os
 import argparse
 
@@ -11,15 +14,11 @@ import argparse
 # ===================================================
 parser = argparse.ArgumentParser(description='Create injection')
 parser.add_argument('--SimFile',type=str,help='Simulation file',required=True)
-#parser.add_argument('--OutputDir',type=str,help='Output directory',required=True)
 parser.add_argument('--Tobs',type=float,help='Number of expected event',default=1,required=False)
-parser.add_argument('--Tag',type=str,help='Tag of files',default='Injection',required=False)
 
 args = parser.parse_args()
 SimFile = args.SimFile
-#OutputDir = args.OutputDir
 Tobs = args.Tobs
-Tag = args.Tag
 
 # ===================================================
 # Loading training data and construct Gaussian Processes
@@ -27,13 +26,9 @@ Tag = args.Tag
 
 PCAtolerance = 1e-20
 simulations = np.load(SimFile)
-#output_directory = OutputDir
-tag = Tag
 sigma = 100
-#if not os.path.exists(output_directory):
-#	os.mkdir(output_directory)
 
-histBins = simulations['histBin']
+histBins = simulations['histBins']
 if histBins.ndim ==1:
 	histBins = histBins.reshape(histBins.size,1)
 
