@@ -159,8 +159,8 @@ pool = Pool(4)
 print('Start sampling log posterior.')
 
 sampler = emcee.EnsembleSampler(nwalkers,ndim,LogProb,pool=pool)
-p0,_,_ = sampler.run_mcmc(p0,100) # Burn-in steps
+p0 = sampler.run_mcmc(p0,100) # Burn-in steps
 sampler.reset()
-p0,_,_ = sampler.run_mcmc(p0,npoints) # Sampling and output
+p0 = sampler.run_mcmc(p0.coords,npoints) # Sampling and output
 np.savez(outputDirectory,samples=sampler.flatchain)
 
